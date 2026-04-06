@@ -8,7 +8,7 @@ from python_qt_binding.QtWidgets import QGroupBox, QFormLayout, QPushButton, QSi
 from python_qt_binding.QtWidgets import QHBoxLayout, QLabel, QFileDialog, QSplitter
 from python_qt_binding.QtGui import QBrush, QPainter, QPen, QColor
 
-from eufs_tracks.track_generator import TrackGenerator
+from track_generator import TrackGenerator
 
 
 # ranges include both start and end values
@@ -271,3 +271,18 @@ class EUFSTracksGUI(Plugin):
         self._widget = MainWindow()
         context.add_widget(self._widget)
         self.logger.info("EUFSTracksGUI started!")
+
+if __name__ == "__main__":
+    import sys
+    from python_qt_binding.QtWidgets import QApplication
+
+    app = QApplication(sys.argv)
+
+    try:
+        window = MainWindow()
+        window.show()
+        
+        print("EUFS Track Generator Launching (Standalone Mode)...")
+        sys.exit(app.exec_())
+    except Exception as e:
+        print(f"Failed to launch GUI: {e}")

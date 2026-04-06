@@ -57,7 +57,7 @@
     <!-- We need to tell Gazebo where to look for models via an environment variable -->
     <include>
       <!-- This matches the name in model.config -->
-      <uri>model://blue_cone</uri>
+      <uri>model://yellow_cone</uri>
       <!-- We place it slightly in front of the origin -->
       <pose>2 0 0.1625 0 0 0</pose> <!-- height is half of 0.325 so it sits on the ground -->
     </include>
