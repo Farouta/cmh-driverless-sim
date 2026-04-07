@@ -46,6 +46,39 @@
     <!-- Wheels -->
     <xacro:wheels chassis_width="1.6" wheelbase="1.580"/>
 
+
+    <!-- Gazebo Harmonic Ackermann Drive Plugin -->
+    <gazebo>
+        <plugin filename="gz-sim-ackermann-steering-system" name="gz::sim::systems::AckermannSteering">
+            <left_joint>rear_left_wheel_joint</left_joint>
+            <right_joint>rear_right_wheel_joint</right_joint>
+            
+            <left_steering_joint>left_steering_hinge_joint</left_steering_joint>
+            <right_steering_joint>right_steering_hinge_joint</right_steering_joint>
+            
+            <wheel_separation>1.6</wheel_separation>
+            <wheel_base>1.580</wheel_base>
+            <wheel_radius>0.2525</wheel_radius>
+            <steering_limit>0.5</steering_limit> <!-- Radians (~28 degrees) -->
+            
+            <topic>/cmd_vel</topic>
+            <!-- Odometry Publishing -->
+            <kingpin_width>1.3</kingpin_width>
+            <odom_topic>/odom</odom_topic>
+
+            <max_velocity>200.0</max_velocity>
+            <max_acceleration>2.0</max_acceleration>
+            <min_acceleration>-5.0</min_acceleration> 
+            
+            <odom_publish_frequency>50</odom_publish_frequency>
+            <frame_id>odom</frame_id>
+            <child_frame_id>base_footprint</child_frame_id>
+        </plugin>
+
+        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+            <topic>/joint_states</topic>
+        </plugin>
+    </gazebo>
     <!-- *********************************************** -->
     <!--                 MAIN SENSORS                    -->
     <!-- *********************************************** -->
