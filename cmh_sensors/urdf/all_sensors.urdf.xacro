@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot name="all_sensors" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- This file unifies all sensors that can be used on simulation, defined as xacro:macros -->
+
+  <!-- monocular camera -->
+  <xacro:include filename="$(find cmh_sensors)/urdf/monocular_camera.urdf.xacro"/>
+
+</robot>

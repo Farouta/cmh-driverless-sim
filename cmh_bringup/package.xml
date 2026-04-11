@@ -5,8 +5,7 @@
   <version>2.0.0</version>
   <description>Launch, URDF, mesh and material files for the CMH autonomous vehicle.</description>
 
-<maintainer email="cambobmat@icloud.com">Cameron Matthew</maintainer>
-<maintainer email="siliconlad@protonmail.com">Angus Stewart</maintainer>
+<maintainer email="fourat.amri@hotmail.com">Fourat Zai El Amri</maintainer>
 
   <license>MIT</license>
 

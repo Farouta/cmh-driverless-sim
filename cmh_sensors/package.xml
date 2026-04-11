@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>cmh_gazebo</name>
+  <name>cmh_sensors</name>
   <version>2.0.0</version>
   <description>Launch, URDF, mesh and material files for the CMH autonomous vehicle.</description>
 

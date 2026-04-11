@@ -78,6 +78,7 @@ def launch_setup(context, *args, **kwargs):
             '/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock',
             # Pass velocity commands from ROS 2 to Gazebo
             '/cmd_vel@geometry_msgs/msg/Twist]gz.msgs.Twist',
+            "/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image"
         ],
         output='screen'
     )
