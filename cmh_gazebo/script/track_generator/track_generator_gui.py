@@ -247,7 +247,7 @@ class MainWindow(QSplitter):
 
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setWindowTitle("EUFS Track Generator")
+        self.setWindowTitle("Track Generator based on EUFS ")
         self.setMinimumSize(720, 480)
 
         self.track_display = TrackDisplay()

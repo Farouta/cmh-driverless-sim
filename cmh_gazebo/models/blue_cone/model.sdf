@@ -20,14 +20,12 @@
             <uri>model://cmh_gazebo/meshes/cone_blue.dae</uri>
           </mesh>
         </geometry>
-        <cast_shadows>true</cast_shadows>
+        <cast_shadows>false</cast_shadows>
       </visual>
       <collision name="collision">
         <max_contacts>3</max_contacts>
         <geometry>
-          <mesh>
-            <uri>model://cmh_gazebo/meshes/cone_blue.dae</uri>
-          </mesh>
+            <cone><radius>0.15</radius> <length>0.5</length>  </cone>
         </geometry>
       </collision>
     </link>

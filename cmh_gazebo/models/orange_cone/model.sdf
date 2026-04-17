@@ -25,9 +25,7 @@
       <collision name='collision'>
         <max_contacts>3</max_contacts>
         <geometry>
-          <mesh>
-            <uri>model://cmh_gazebo/meshes/cone_orange.dae</uri>
-          </mesh>
+            <cone><radius>0.15</radius> <length>0.5</length>  </cone>
         </geometry>
       </collision>
     </link>
