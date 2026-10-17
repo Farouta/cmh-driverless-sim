@@ -1,11 +1,11 @@
 # cmh_gazebo
 
-This package contains the Gazebo Harmonic simulation environments and 3D cone models for the Campus Motorsport Hannover Formula Student Driverless team.
+This package contains the Gazebo (Jetty) simulation environments and 3D cone models for the Campus Motorsport Hannover Formula Student Driverless team.
 
 ## Acknowledgements & Migration
 The environments and CSV layouts are based on work from the [Edinburgh University Formula Student (EUFS) open-source repository](https://gitlab.com/eufs/public/eufs_sim). 
 
-Adjustments were made to migrate their original models (which were structured for older ROS/Gazebo versions) to our current stack. Most notably, the SDF version has been updated from `1.6` to `1.10` for compatibility with Gazebo Harmonic.
+Adjustments were made to migrate their original models (which were structured for older ROS/Gazebo versions) to our current stack. Most notably, the SDF version has been updated from `1.6` to `1.10` for compatibility with Gazebo Harmonic and newer (the project now runs on Gazebo Jetty).
 
 ## Structure & Meshes
 * The `meshes/` folder contains the `.dae` (Blender 3D) models for the cones.

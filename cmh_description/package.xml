@@ -3,31 +3,19 @@
 <package format="3">
   <name>cmh_description</name>
   <version>2.0.0</version>
-  <description>Launch, URDF, mesh and material files for the CMH autonomous vehicle.</description>
+  <description>URDF/xacro model, meshes and vehicle parameter configs of the CMH driverless car.</description>
 
-<maintainer email="fourat.amri@hotmail.com">Fourat Zai El Amri</maintainer>
+  <maintainer email="fourat.amri@hotmail.com">Fourat Zai El Amri</maintainer>
 
   <license>MIT</license>
 
-  <url type="website">http://eufs.co</url>
-  <url type="repository">https://gitlab.com/eufs/eufs_sim</url>
-  <url type="bugtracker">https://gitlab.com/eufs/eufs_sim/issues</url>
+  <url type="repository">https://github.com/Farouta/fs-driverless-sim</url>
+  <url type="bugtracker">https://github.com/Farouta/fs-driverless-sim/issues</url>
 
-  <depend>ament_index_python</depend>
-  <depend>xacro</depend>
-  <depend>rqt_gui</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>launch</depend>
-  <depend>launch_ros</depend>
-
-  <depend>joint_state_publisher</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>rviz2</depend>
-
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>cmh_sensors</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

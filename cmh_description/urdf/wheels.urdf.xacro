@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="wheels" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:macro name="wheels"
-               params="chassis_width wheelbase">
+               params="track_width wheelbase">
 
     <!-- ********** -->
     <!-- Parameters -->
@@ -11,7 +11,7 @@
 
     <xacro:property name="wheel_mass" value="10.0"/>
 
-    <xacro:property name="wheel_diameter" value="0.505"/>
+    <xacro:property name="wheel_diameter" value="${2 * config['tire']['radius']}"/>
     <xacro:property name="wheel_width" value="0.2"/>
 
     <xacro:property name="wheel_friction_mu1" value="2"/>
@@ -31,10 +31,10 @@
           <origin xyz="0 0 0" rpy="0 0 0" />
           <mass value="${wheel_mass}"/>
           <inertia
-              ixx="0.3"
+              ixx="0.2"
               ixy="0"
               ixz="0"
-              iyy="0.2"
+              iyy="0.3"
               iyz="0"
               izz="0.2"   />
         </inertial>
@@ -52,12 +52,11 @@
             <cylinder radius="${wheel_diameter / 2}" length="${wheel_width}"/>
           </geometry>
         </collision>
+        
       </link>
 
       <gazebo reference="${lr_prefix}_${fr_prefix}_wheel">
-        <material name="black">
-          <color rgba="0.1 0.1 0.1 1"/>
-        </material>
+      
         <collision>
           <surface>
             <friction>
@@ -75,6 +74,7 @@
             </contact>
           </surface>
         </collision>
+        
       </gazebo>
     </xacro:macro>
 
@@ -88,7 +88,7 @@
 
       <joint name="${lr_prefix}_steering_hinge_joint" type="revolute">
         <origin xyz="${wheelbase / 2}
-                     ${lr_reflect * ((chassis_width - wheel_width) / 2)}
+                     ${lr_reflect * track_width / 2}
                      0"
                 rpy="0 0 0"/>
         <parent link="chassis"/>
@@ -129,7 +129,7 @@
 
       <joint name="rear_${lr_prefix}_wheel_joint" type="continuous">
         <origin xyz="${-1 * wheelbase / 2}
-                     ${lr_reflect * ((chassis_width - wheel_width) / 2)}
+                     ${lr_reflect * track_width / 2}
                      0"
                 rpy="0 0 0"/>
         <parent link="chassis"/>

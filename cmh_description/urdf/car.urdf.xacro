@@ -42,32 +42,33 @@
     <xacro:cmh_base chassis_mesh="file://$(find cmh_description)/meshes/sisu-20d.dae"/>
 
     <!-- Wheels -->
-    <xacro:wheels chassis_width="1.6" wheelbase="1.580"/>
+    <xacro:wheels track_width="${config['kinematics']['axle_width']}" wheelbase="${config['kinematics']['l']}"/>
 
 
-    <!-- Gazebo Harmonic Ackermann Drive Plugin -->
+    <!-- Gazebo Ackermann Drive Plugin (geometry and limits come from the config file) -->
     <gazebo>
         <plugin filename="gz-sim-ackermann-steering-system" name="gz::sim::systems::AckermannSteering">
             <left_joint>rear_left_wheel_joint</left_joint>
             <right_joint>rear_right_wheel_joint</right_joint>
-            
+
             <left_steering_joint>left_steering_hinge_joint</left_steering_joint>
             <right_steering_joint>right_steering_hinge_joint</right_steering_joint>
-            
-            <wheel_separation>1.6</wheel_separation>
-            <wheel_base>1.580</wheel_base>
-            <wheel_radius>0.2525</wheel_radius>
-            <steering_limit>0.5</steering_limit> <!-- Radians (~28 degrees) -->
-            
-            <topic>/cmd_vel</topic>
-            <!-- Odometry Publishing -->
-            <kingpin_width>1.3</kingpin_width>
-            <odom_topic>/odom</odom_topic>
 
-            <max_velocity>200.0</max_velocity>
-            <max_acceleration>2.0</max_acceleration>
-            <min_acceleration>-5.0</min_acceleration> 
-            
+            <wheel_separation>${config['kinematics']['axle_width']}</wheel_separation>
+            <kingpin_width>${config['kinematics']['axle_width']}</kingpin_width>
+            <wheel_base>${config['kinematics']['l']}</wheel_base>
+            <wheel_radius>${config['tire']['radius']}</wheel_radius>
+            <steering_limit>${config['input_ranges']['steering']['max']}</steering_limit> <!-- Radians -->
+
+            <topic>/cmd_vel</topic>
+
+            <max_velocity>${config['input_ranges']['velocity']['max']}</max_velocity>
+            <max_acceleration>${config['input_ranges']['acceleration']['max']}</max_acceleration>
+            <min_acceleration>${config['input_ranges']['acceleration']['min']}</min_acceleration>
+
+            <!-- Odometry Publishing -->
+            <odom_topic>/odom</odom_topic>
+            <tf_topic>/tf</tf_topic>
             <odom_publish_frequency>50</odom_publish_frequency>
             <frame_id>odom</frame_id>
             <child_frame_id>base_footprint</child_frame_id>
@@ -85,7 +86,7 @@
     CAM: -0.110 0.0 0.800 
     -->
 
-    <xacro:monocular_camera parent="chassis" prefix="camera" active="$(arg simulate_perception)">
+    <xacro:monocular_camera parent="chassis" prefix="camera" simulate_perception="$(arg simulate_perception)">
         <origin xyz="-0.08 0.0 0.76" rpy="0 0.1 0"/>
     </xacro:monocular_camera>
 

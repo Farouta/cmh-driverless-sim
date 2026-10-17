@@ -3,26 +3,18 @@
 <package format="3">
   <name>cmh_gazebo</name>
   <version>2.0.0</version>
-  <description>Launch, URDF, mesh and material files for the CMH autonomous vehicle.</description>
+  <description>Gazebo worlds, cone models and track layouts (CSV) for the CMH driverless simulation.</description>
 
-<maintainer email="fourat.amri@hotmail.com">Fourat Zai El Amri</maintainer>
+  <maintainer email="fourat.amri@hotmail.com">Fourat Zai El Amri</maintainer>
+
   <license>MIT</license>
-  
-  <depend>ament_index_python</depend>
-  <depend>xacro</depend>
-  <depend>rqt_gui</depend>
 
-  <depend>launch</depend>
-  <depend>launch_ros</depend>
+  <url type="repository">https://github.com/Farouta/fs-driverless-sim</url>
+  <url type="bugtracker">https://github.com/Farouta/fs-driverless-sim/issues</url>
 
-  <depend>joint_state_publisher</depend>
-  <depend>robot_state_publisher</depend>
-  <depend>rviz2</depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <test_depend>ament_copyright</test_depend>
-  <test_depend>ament_flake8</test_depend>
-  <test_depend>ament_pep257</test_depend>
-  <test_depend>python3-pytest</test_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

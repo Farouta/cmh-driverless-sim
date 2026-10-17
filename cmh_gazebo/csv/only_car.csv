@@ -1,0 +1,2 @@
+tag,x,y,direction,x_variance,y_variance,xy_covariance
+car_start,1.0,1.0,0.0,0.0,0.0,0.0

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="monocular_camera" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:macro name="monocular_camera" params="prefix parent *origin active">
+  <xacro:macro name="monocular_camera" params="prefix parent *origin simulate_perception">
 
     <joint name="${prefix}_base_joint" type="fixed">
       <xacro:insert_block name="origin"/>
@@ -22,7 +22,8 @@
     </link>
 
 
-    <xacro:unless value="${active}">
+    <!-- The camera sensor only exists when perception is simulated -->
+    <xacro:if value="${simulate_perception}">
       <gazebo reference="${prefix}_center">
         <sensor type="camera" name="${prefix}_monocular_rgb_camera">
           <always_on>true</always_on>
@@ -30,27 +31,41 @@
           <visualize>true</visualize>
           
           <topic>${prefix}/image_raw</topic>
+          <gz_frame_id>${prefix}_center</gz_frame_id>
           
           <camera name="${prefix}_front">
-            <horizontal_fov>1.39</horizontal_fov>
+
             <image>
               <width>640</width>
               <height>480</height>
               <format>R8G8B8</format>
             </image>
+
+            <lens>
+              <intrinsics>
+                <fx>500.0</fx>
+                <fy>500.0</fy>
+                <cx>320.0</cx>
+                <cy>240.0</cy>
+                <s>0.0</s>
+              </intrinsics>
+            </lens>
+
             <clip>
               <near>0.05</near>
               <far>20</far>
             </clip>
+
             <noise>
               <type>gaussian</type>
               <mean>0.0</mean>
               <stddev>0.007</stddev>
             </noise>
+
           </camera>
         </sensor>
       </gazebo>
-    </xacro:unless>
+    </xacro:if>
 
   </xacro:macro>
 </robot>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<robot name="cmh" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- ***************** -->
+    <!-- Config parameters -->
+    <!-- ***************** -->
+
+    <!--  Load the config file  -->
+    <xacro:arg name="config_file" default=""/>
+    <xacro:property name="config" value="${xacro.load_yaml('$(arg config_file)')}"/>
+
+    <!-- ***************** -->
+    <!-- Global parameters -->
+    <!-- ***************** -->
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <!-- If the perception stack should be simulated or if sensors should be used -->
+    <xacro:arg name="simulate_perception" default="true"/>
+
+    <xacro:include filename="$(find cmh_description)/urdf/mini_car/mini_wheels.urdf.xacro"/>
+
+    <!-- Import CMH base element with the chassis -->
+    <xacro:include filename="$(find cmh_description)/urdf/mini_car/mini_cmh_base.urdf.xacro" />
+
+    <!-- Import all available sensors -->
+    <xacro:include filename="$(find cmh_sensors)/urdf/all_sensors.urdf.xacro" /> 
+
+    <!--  Include the plugins  
+    <xacro:include filename="$(find cmh_plugins)/urdf/cmh_plugins.gazebo.xacro" /> -->
+
+    <!-- *************** -->
+    <!-- Robots Elements -->
+    <!-- *************** -->
+
+    <!-- Chassis of the car -->
+    <xacro:cmh_base />
+
+    <!-- Wheels -->
+    <xacro:wheels track_width="${config['kinematics']['axle_width']}" wheelbase="${config['kinematics']['l']}"/>
+
+
+    <!-- Gazebo Ackermann Drive Plugin (geometry and limits come from the config file) -->
+    <gazebo>
+        <plugin filename="gz-sim-ackermann-steering-system" name="gz::sim::systems::AckermannSteering">
+            <left_joint>rear_left_wheel_joint</left_joint>
+            <right_joint>rear_right_wheel_joint</right_joint>
+
+            <left_steering_joint>left_steering_hinge_joint</left_steering_joint>
+            <right_steering_joint>right_steering_hinge_joint</right_steering_joint>
+
+            <wheel_separation>${config['kinematics']['axle_width']}</wheel_separation>
+            <kingpin_width>${config['kinematics']['axle_width']}</kingpin_width>
+            <wheel_base>${config['kinematics']['l']}</wheel_base>
+            <wheel_radius>${config['tire']['radius']}</wheel_radius>
+            <steering_limit>${config['input_ranges']['steering']['max']}</steering_limit> <!-- Radians -->
+
+            <topic>/cmd_vel</topic>
+
+            <max_velocity>${config['input_ranges']['velocity']['max']}</max_velocity>
+            <max_acceleration>${config['input_ranges']['acceleration']['max']}</max_acceleration>
+            <min_acceleration>${config['input_ranges']['acceleration']['min']}</min_acceleration>
+
+            <!-- Odometry Publishing -->
+            <odom_topic>/odom</odom_topic>
+            <tf_topic>/tf</tf_topic>
+            <odom_publish_frequency>50</odom_publish_frequency>
+            <frame_id>odom</frame_id>
+            <child_frame_id>base_footprint</child_frame_id>
+        </plugin>
+
+        <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+            <topic>/joint_states</topic>
+        </plugin>
+    </gazebo>
+    <!-- *********************************************** -->
+    <!--                 MAIN SENSORS                    -->
+    <!-- *********************************************** -->
+
+    <!--     LOCATIONS: (XYZ)
+    CAM: -0.110 0.0 0.800 
+    -->
+    <xacro:monocular_camera parent="chassis" prefix="camera" simulate_perception="$(arg simulate_perception)">
+        <origin xyz="-0.08 0.0 0.76" rpy="0 0.1 0"/>
+    </xacro:monocular_camera>
+
+</robot>
